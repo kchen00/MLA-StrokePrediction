@@ -1,8 +1,9 @@
 import streamlit as st
 import joblib
 
-"# Stroke Prediction using health data"
-"Enter the following data to predict stroke"
+with open("readme.md", "r") as f:
+    readme_content = f.read()
+    st.markdown(readme_content)
 
 # Load the machine learning model
 model = joblib.load('model.pkl')
