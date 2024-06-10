@@ -43,17 +43,13 @@ if submit_button:
     }
 
     # Convert categorical inputs to numerical if needed for ML model
-    gender_map = {"Male": 0, "Female": 1, "Other": 2}
+    gender_map = {'Female': 1, 'Male': 2}
     hypertension_map = {"No": 0, "Yes": 1}
     heart_disease_map = {"No": 0, "Yes": 1}
-    ever_married_map = {"No": 0, "Yes": 1}
-    work_type_map = {"Children": 0, 
-                     "Government job": 1, 
-                     "Never worked": 2, 
-                     "Private": 3, 
-                     "Self-employed": 4}
-    residence_type_map = {"Urban": 0, "Rural": 1}
-    smoking_status_map = {"Never smoked": 0, "Formerly smoked": 1, "Smokes": 2, "Unknown": 3}
+    ever_married_map = {'No': 1, 'Yes': 2}
+    work_type_map = {'Government job': 1, 'Never worked': 2, 'Private': 3, 'Self-employed': 4, 'Children': 5}
+    residence_type_map = {'Rural': 1, 'Urban': 2}
+    smoking_status_map = {'Unknown': 1, 'Formerly smoked': 2, 'Never smoked': 3, 'Smokes': 4}
 
     # Create numerical representation of inputs
     input_data = [
@@ -71,6 +67,7 @@ if submit_button:
 
     # make prediction
     prediction = model.predict([input_data])[0]
+    st.write(prediction)
 
     # Map the prediction to text
     prediction_map = {0: 'Negative', 1: 'Positive'}
