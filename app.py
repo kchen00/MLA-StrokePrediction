@@ -10,13 +10,11 @@ model = joblib.load('model.pkl')
 
 # Create a form
 with st.form(key="health_form"):
-    gender = st.selectbox("Gender", ["Male", "Female"])
     age = st.number_input("Age", min_value=0, max_value=120, step=1)
     hypertension = st.selectbox("Hypertension", ["No", "Yes"])
     heart_disease = st.selectbox("Heart Disease", ["No", "Yes"])
     ever_married = st.selectbox("Ever Married", ["No", "Yes"])
     work_type = st.selectbox("Work Type", ["Children", "Government job", "Never worked", "Private","Self-employed"])
-    residence_type = st.selectbox("Residence Type", ["Urban", "Rural"])
     avg_glucose_level = st.number_input("Average Glucose Level", min_value=0.0, step=0.1)
     bmi = st.number_input("BMI", min_value=0.0, step=0.1)
     smoking_status = st.selectbox("Smoking Status", ["Never smoked", "Formerly smoked", "Smokes", "Unknown"])
@@ -30,13 +28,11 @@ if submit_button:
 
     # Store inputs as variables
     input_data = {
-        "gender": gender,
         "age": age,
         "hypertension": hypertension,
         "heart_disease": heart_disease,
         "ever_married": ever_married,
         "work_type": work_type,
-        "residence_type": residence_type,
         "avg_glucose_level": avg_glucose_level,
         "bmi": bmi,
         "smoking_status": smoking_status
@@ -48,18 +44,15 @@ if submit_button:
     heart_disease_map = {"No": 0, "Yes": 1}
     ever_married_map = {'No': 1, 'Yes': 2}
     work_type_map = {'Government job': 1, 'Never worked': 2, 'Private': 3, 'Self-employed': 4, 'Children': 5}
-    residence_type_map = {'Rural': 1, 'Urban': 2}
     smoking_status_map = {'Unknown': 1, 'Formerly smoked': 2, 'Never smoked': 3, 'Smokes': 4}
 
     # Create numerical representation of inputs
     input_data = [
-        gender_map[gender],
         age,
         hypertension_map[hypertension],
         heart_disease_map[heart_disease],
         ever_married_map[ever_married],
         work_type_map[work_type],
-        residence_type_map[residence_type],
         avg_glucose_level,
         bmi,
         smoking_status_map[smoking_status]
@@ -67,7 +60,6 @@ if submit_button:
 
     # make prediction
     prediction = model.predict([input_data])[0]
-    st.write(prediction)
 
     # Map the prediction to text
     prediction_map = {0: 'Negative', 1: 'Positive'}
